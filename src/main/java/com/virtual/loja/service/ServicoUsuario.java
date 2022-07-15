@@ -42,6 +42,10 @@ public class ServicoUsuario {
 		return repositorioUsuario.existsById(id);
 	}
 	
+	private boolean existsbyCpf(String cpf) {
+		return repositorioUsuario.existsByCpf(cpf);
+	}
+	
 	public Usuario findById(Long id) throws ResourceNotFoundException {
 		Usuario usuario = repositorioUsuario.findById(id).orElse(null);
 		if(usuario== null) {
@@ -59,8 +63,11 @@ public class ServicoUsuario {
 		if(!StringUtils.isEmpty(usuario.getNome()) && validarCPF(usuario.getCpf())) {
 			Matcher matcher  = pattern.matcher(usuario.getEmail());
 		    if(matcher.matches()==false) usuario.setEmail("");
-			//Ele funciona, mas não aqui || usuario.setImagemPerfilBase64(Base64.getEncoder().encode(usuario.getImagemPerfilBase64()));;
+			 //usuario.setImagemPerfilBase64(Base64.getEncoder().encode(usuario.getImagemPerfilBase64()));;
 			usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
+			if(usuario.getCpf() != null && existsbyCpf(usuario.getCpf())) {
+				throw new ResourceAlreadyExistsException("Usuário com o CPF: "+usuario.getId()+"\n já existe");
+			}
 			if(usuario.getId() != null && existsbyId(usuario.getId())) {
 				throw new ResourceAlreadyExistsException("Usuário com o id: "+usuario.getId()+"\n já existe");
 			}

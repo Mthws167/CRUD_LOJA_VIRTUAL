@@ -14,8 +14,6 @@ public class UsuarioDTO {
 	private String nome;
 	private String email;
 	private String cpf;
-	private String observacao;
-	private Date dataCadastro;
 	
 	public UsuarioDTO converter(Usuario usuario) {
 		UsuarioDTO usuarioDTO = new UsuarioDTO();		

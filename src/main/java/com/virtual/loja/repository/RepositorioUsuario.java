@@ -20,4 +20,9 @@ public interface RepositorioUsuario extends JpaRepository<Usuario, Long>{
 	
 	Page<Usuario> findAll(Pageable page);
 
+	boolean existsByCpf(String cpf);
+
+	
+	
+
 }

@@ -1,6 +1,7 @@
 package com.virtual.loja.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -47,10 +48,10 @@ public class Usuario implements Serializable{
 	private byte[] imagemPerfilBase64;
 	
 	@CreationTimestamp
-	private LocalDateTime dataCadastro;
+	private Timestamp dataCadastro;
 	
 	@UpdateTimestamp
-	private LocalDateTime dataModificacao;
+	private Timestamp dataModificacao;
 	
 	
 
